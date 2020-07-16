@@ -8,15 +8,15 @@ jobs:
     working_directory: ~/app
     steps:
       - checkout
-      - stup_remote_docker
+      - setup_remote_docker
       - run:
-         name: Build Docker image
-         command: |
-           docker build -t $IMAGE_NAME:latest .
+          name: Build Docker image
+          command: |
+            docker build -t $IMAGE_NAME:latest .
       - run:
           name: Push Docker Image
           command: |
-           echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push $IMAGE_NAME:latest
 workflows:
   version: 2
